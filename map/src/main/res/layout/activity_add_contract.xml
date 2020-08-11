@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".mvp.view.AddContractActivity">
+
+
+    <com.example.widget.TitleBar
+        android:id="@+id/tb_addcontract"
+        app:left_icon="@drawable/back"
+        app:left_iocn_visible="true"
+        app:right_icon_visible="true"
+        app:title_txt="联系人"
+        android:gravity="center"
+        android:background="@color/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"/>
+    <TextView
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="1dp" />
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tl_add"
+        android:background="@color/colorPrimary"
+        style="@style/tab_item_title_style"
+        android:layout_width="match_parent"
+        app:tabIndicatorColor="#fff"
+        android:layout_height="50dp">
+
+        <com.google.android.material.tabs.TabItem
+            android:text="找人"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+        <com.google.android.material.tabs.TabItem
+            android:text="找群"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+
+    </com.google.android.material.tabs.TabLayout>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/vp_add"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>

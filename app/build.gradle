@@ -1,21 +1,39 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.mob.sdk'
+
+def appInfo = rootProject.ext.Androids
 
 android {
-    compileSdkVersion 29
-    buildToolsVersion "29.0.3"
+    compileSdkVersion appInfo.compileSdkVersion
+    buildToolsVersion appInfo.buildToolsVersion
     defaultConfig {
+        multiDexEnabled true
         applicationId "com.example.gisimproject"
-        minSdkVersion 16
-        targetSdkVersion 29
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion appInfo.minSdkVersion
+        targetSdkVersion appInfo.targetSdkVersion
+        versionCode appInfo.versionCode
+        versionName appInfo.versionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
+        android {
+            compileOptions {
+                sourceCompatibility 1.8
+                targetCompatibility 1.8
+            }
+        }
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+    dexOptions {
+        javaMaxHeapSize "4g"
     }
 }
 
@@ -26,4 +44,39 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation project(path: ':mvp')
+    implementation project(path: ':common')
+    implementation project(path: ':XmppLibrary')
+    implementation project(path: ':router')
+    implementation project(path: ':imageloader')
+    implementation project(path: ':storage')
+    implementation project(path: ':net')
+    if (!isNeedUser.toBoolean()) {
+        implementation project(path: ':user')
+    }
+    if (!isNeedMap.toBoolean()) {
+        implementation project(path: ':map')
+    }
+    implementation 'com.android.support:multidex:1.0.3'
+}
+MobSDK {
+    appKey "3022bfd4744a6"
+    appSecret "5326b348a83ba8e7243c6b15f0937950"
+    ShareSDK {
+        loopShare false
+        devInfo {
+            Wechat {
+                appId "wx4868b35061f87885"
+                appSecret "64020361b8ec4c99936c0e3999a9f249"
+                userName "gh_afb25ac019c9"
+                path "pages/index/index.html?id=1"
+                withShareTicket true
+                miniprogramType 2
+            }
+            WechatMoments {
+                appId "wx4868b35061f87885"
+                appSecret "64020361b8ec4c99936c0e3999a9f249"
+            }
+        }
+    }
 }
